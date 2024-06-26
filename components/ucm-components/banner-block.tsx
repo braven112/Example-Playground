@@ -20,7 +20,7 @@ export default function BannerBlock(props: DynamicBlock) {
             ucm_value_to_use == 'primary' ?
             ucm[0]?.media['primary']?.url :
             ucm[0]?.media['secondary']?.url
-          }?format=webp&width=800`} alt="" />
+          }?format=webply&width=800`} alt="" />
         </div>
       </div>
     </div>

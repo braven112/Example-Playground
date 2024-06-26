@@ -16,7 +16,7 @@ export default function HeroBlock(props: DynamicBlock) {
           ucm_value_to_use == 'primary' ?
           ucm[0]?.media['primary']?.url :
           ucm[0]?.media['secondary']?.url
-        }?format=webp&width=2000")`,
+        }?format=webply&width=2000")`,
         backgroundRepeat: 'no-repeat',
         backgroundSize: 'cover',
       }}
