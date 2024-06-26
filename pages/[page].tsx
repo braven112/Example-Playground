@@ -13,7 +13,7 @@ export default function Page(props: Props) {
   async function fetchData() {
     try {
       const entryRes = await getAlaskaPageRes(entryUrl);
-      console.log('Alaska_Airlines Page Payload: ', entryRes)
+      // console.log('Alaska_Airlines Page Payload: ', entryRes)
       if (!entryRes) throw new Error('Status code 404');
       setEntry(entryRes);
     } catch (error) {
