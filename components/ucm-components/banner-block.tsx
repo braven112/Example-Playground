@@ -15,12 +15,11 @@ export default function BannerBlock(props: DynamicBlock) {
           {ucmDataHandler(remainingFields, ucm[0])}
         </div>
         <div className="grid-item">
-          <img src={`
-          ${
+          <img src={`${
             ucm_value_to_use == 'primary' ?
             ucm[0]?.media['primary']?.url :
             ucm[0]?.media['secondary']?.url
-          }?format=webply&width=800`} alt="" />
+          }?format=webply&width=800`} alt="" loading="lazy" />
         </div>
       </div>
     </div>
