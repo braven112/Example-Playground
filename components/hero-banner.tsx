@@ -27,7 +27,7 @@ export default function HeroBanner(props: BannerProps) {
 
   return (
     <div
-      className='hero-banner'
+      className='hero-banner marnel'
       style={{
         background: banner?.bg_color ? banner.bg_color : '',
       }}
