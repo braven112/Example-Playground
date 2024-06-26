@@ -1360,3 +1360,149 @@ footer a {
 .string-value  span{
   color: #5d9ccb !important;
 }
+
+
+/* HERO BLOCK STYLING */
+.hero-block {
+  container: heroblock / inline-size;
+  width: 100%;
+  margin: 0 auto 0 auto;
+  padding: 0;
+  background-color: '';
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 100% 60%;
+}
+
+.hero-block .grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  text-wrap: balance;
+  max-width: 1232px;
+  margin: 0 auto;
+  padding: 3% 0;
+  color:#fff;
+  font-weight: 200;
+}
+
+.hero-block .grid-container .grid-item:first-child {
+  background-color: #0C2747;
+  padding: 5%;
+}
+
+.hero-block .grid-container .grid-item:first-child span{
+  font-size: 25px;
+  margin-bottom: 20px;
+}
+
+.hero-block .grid-container .grid-item:first-child h1{
+  font-size: 46px;
+  line-height: 45px;
+  font-weight: 200;
+}
+
+.hero-block .grid-container .grid-item:first-child h2{
+  font-size: 36px;
+  margin: 30px 0 10px;
+  line-height: 50px;
+  color: #fff;
+  font-weight: 200;
+}
+
+.hero-block .grid-container .grid-item:first-child p{
+  font-size: 18px;
+  line-height: 24px;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.hero-block .grid-container .grid-item:first-child h5{
+  font-size: 14px;
+  font-weight: 200;
+}
+
+@container heroblock (inline-size < 768px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .grid-item:first-child {
+    order: 1;
+  }
+  .grid-item:last-child {
+    order: 2;
+  }
+}
+
+/* HERO BLOCK STYLING */
+
+/* BANNER BLOCK STYLING */
+.banner-block {
+  container: bannerblock / inline-size;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+}
+
+.banner-block .grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  text-wrap: balance;
+  max-width: 1232px;
+  margin: 40px auto 40px auto;
+  padding: 0 20px;
+}
+
+.banner-block .grid-container .grid-item {
+  color: #0c2747;
+  font-weight: 200;
+}
+
+.banner-block .grid-container .grid-item img {
+  max-width: 100%;
+}
+
+.banner-block .grid-container .grid-item h1 {
+  font-size: 40px;
+  margin-top: 50px;
+  font-weight: 200;
+}
+
+.banner-block .grid-container .grid-item h2 {
+  font-size: 3em;
+  margin: 26px 0;
+  color: #0c2747;
+  font-weight: 200;
+}
+
+.banner-block .grid-container .grid-item h3 {
+  margin:15px 0;
+  font-size: 24px;
+}
+
+.banner-block .grid-container .grid-item h5 {
+  font-size: 14px;
+  font-weight: 200;
+}
+.banner-block .grid-container .grid-item p {
+  font-size: 14px;
+  font-weight: 200;
+}
+
+@container bannerblock (max-width: 768px) {
+  .banner-block .grid-container {
+    grid-template-columns: 1fr;
+  }
+  .banner-block .grid-container .grid-item {
+    padding: 0;
+  }
+  .banner-block .grid-container .grid-item:first-child {
+    order: 2;
+  }
+  .banner-block .grid-container .grid-item:last-child {
+    order: 1;
+  }
+}
+/* BANNER BLOCK STYLING */

@@ -56,6 +56,21 @@ export const getPageRes = async (entryUrl) => {
   return response[0];
 };
 
+export const getAlaskaPageRes = async (entryUrl) => {
+  const response = await Stack.getEntryByUrl({
+    contentTypeUid: 'alaska_airlines',
+    entryUrl,
+    referenceFieldPath: [
+      'content_blocks.dynamic_block.ucm',
+      'content_blocks.dynamic_block.configuration',
+      'content_blocks.dynamic_block.ucm.related_campaigns.campaign',
+    ],
+    jsonRtePath: [],
+  });
+  liveEdit && addEditableTags(response[0], 'alaska_airlines', true);
+  return response[0];
+};
+
 export const getBlogListRes = async () => {
   const response = await Stack.getEntry({
     contentTypeUid: 'blog_post',

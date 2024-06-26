@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { onEntryChange } from '../contentstack-sdk';
 import RenderComponents from '../components/render-components';
-import { getPageRes } from '../helper';
+import { getPageRes, getAlaskaPageRes } from '../helper';
 import Skeleton from 'react-loading-skeleton';
 import { Props, Context } from "../typescript/pages";
 
@@ -13,7 +13,9 @@ export default function Home(props: Props) {
 
   async function fetchData() {
     try {
-      const entryRes = await getPageRes(entryUrl);
+      console.log('LEXI from index: ', entryUrl)
+      const entryRes = await getAlaskaPageRes(entryUrl);
+      console.log('MARNEL from index: ', entryRes)
       if (!entryRes) throw new Error('Status code 404');
       setEntry(entryRes);
     } catch (error) {

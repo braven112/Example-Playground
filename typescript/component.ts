@@ -63,6 +63,111 @@ type Widget = {
   $: AdditionalParam;
 }
 
+type Directives = [
+  {
+    ucm_value_to_use: string;
+    background_color: ContentstackImage;
+    text_color: string;
+  }
+]
+
+
+export type ContentModelConfiguration = {
+  component_name: string;
+  directives: Directives;
+  designation: string;
+  $: AdditionalParam;
+}
+
+type ContentstackImage = {
+  content_type: string;
+  filename: string;
+  url: string;
+  uid: string;
+}
+
+type Items = {
+  item_headline: string;
+  item_subheadline: string;
+  item_icon: ContentstackImage;
+  item_copy: string;
+  item_background: ContentstackImage;
+  item_fineprint: string;
+  item_link: {
+    title: string;
+    url: string;
+  };
+  item_override: string;
+}
+
+type Icons = {
+  icon_headline: string;
+  light_icon: ContentstackImage;
+  dark_icon: ContentstackImage;
+  icon_link: string;
+}
+
+
+export type UniversalContentModel = {
+  title: string;
+  teaser: {
+    teaser_icon: ContentstackImage;
+    teaser_headline: string;
+    teaser_subheadline: string;
+    teaser_copy: string;
+  };
+  headline: {
+    lg_headline: string;
+    md_headline: string;
+    sm_headline: string;
+    xs_headline: string;
+  };
+  subheadline: {
+    lg_subheadline: string;
+    md_subheadline: string;
+    sm_subheadline: string;
+    xs_subheadline: string;
+  };
+  description: {
+    lg_description: string;
+    md_description: string;
+    sm_description: string;
+    xs_description: string;
+  };
+  fineprint: {
+    lg_fineprint: string;
+    md_fineprint: string;
+    sm_fineprint: string;
+    xs_fineprint: string;
+  };
+  media: {
+    primary: ContentstackImage;
+    secondary: ContentstackImage;
+  };
+  button: {
+    aria_label: string;
+    link: {
+      title: string;
+      href: string;
+    };
+  };
+  hyperlink: {
+    aria_label: string;
+    role: string;
+    link: {
+      title: string;
+      href: string;
+    };
+  };
+  related_campaigns: {
+    campaign: [UniversalContentModel]
+  };
+  items: [Items];
+  icons: [Icons];
+  $: AdditionalParam;
+}
+
+
 export type Component = {
   hero_banner: Banner;
   section?: SectionProps;
@@ -72,6 +177,14 @@ export type Component = {
   section_with_html_code?: AdditionalParamProps;
   our_team?: TeamProps;
   widget?: Widget;
+  dynamic_block?: DynamicBlock;
+}
+
+export type DynamicBlock = {
+  alias: string;
+  configuration: [ContentModelConfiguration];
+  ucm: [UniversalContentModel];
+  $: AdditionalParam;
 }
 
 export type SectionWithBucket = {

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { onEntryChange } from '../contentstack-sdk';
-import RenderComponents from '../components/render-components';
-import { getPageRes } from '../helper';
+// import RenderComponents from '../components/render-components';
+import RenderBlocks from '../components/blocks/render-blocks';
+import { getPageRes, getAlaskaPageRes } from '../helper';
 import Skeleton from 'react-loading-skeleton';
 import { Props } from "../typescript/pages";
 
@@ -11,7 +12,8 @@ export default function Page(props: Props) {
 
   async function fetchData() {
     try {
-      const entryRes = await getPageRes(entryUrl);
+      const entryRes = await getAlaskaPageRes(entryUrl);
+      console.log('Alaska_Airlines Page Payload: ', entryRes)
       if (!entryRes) throw new Error('Status code 404');
       setEntry(entryRes);
     } catch (error) {
@@ -23,10 +25,10 @@ export default function Page(props: Props) {
     onEntryChange(() => fetchData());
   }, [page]);
 
-  return getEntry.page_components ? (
-    <RenderComponents
-      pageComponents={getEntry.page_components}
-      contentTypeUid='page'
+  return getEntry.content_blocks ? (
+    <RenderBlocks
+      pageComponents={getEntry.content_blocks}
+      contentTypeUid='alaska_airlines'
       entryUid={getEntry.uid}
       locale={getEntry.locale}
     />
@@ -38,7 +40,8 @@ export default function Page(props: Props) {
 export async function getServerSideProps({params}: any) {
   try {
       const entryUrl = params.page.includes('/') ? params.page:`/${params.page}`
-      const entryRes = await getPageRes(entryUrl);
+      const entryRes = await getAlaskaPageRes(entryUrl);
+      // const entryRes = await getPageRes(entryUrl);
       if (!entryRes) throw new Error('404');
       return {
         props: {
