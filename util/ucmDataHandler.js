@@ -4,29 +4,32 @@ const ucmDataHandler = (remainingFields, componentData) => {
       switch (key) {
         case 'teaser':
           return (
-            <span key={key}>{componentData[key][value.ucm_value_to_use]}</span>
+            <span key={key} className="teaser">{componentData[key][value.ucm_value_to_use]}</span>
           );
         case 'headline':
-          return <h1 key={key}>{componentData[key][value.ucm_value_to_use]}</h1>;
+          return <h1 key={key} className="headline">{componentData[key][value.ucm_value_to_use]}</h1>;
+        case 'subheadline':
+          return <h2 key={key} className="subheadline">{componentData[key][value.ucm_value_to_use]}</h2>;
         case 'description':
-          return <p key={key}>{componentData[key][value.ucm_value_to_use]}</p>;
+          return <p key={key} className="description">{componentData[key][value.ucm_value_to_use]}</p>;
         //Price is hardcoded for demo, but would ideally be dynamic price coming from Flight Deals JSON or another source
         case 'price':
-          return <h2 key={key}>$69 one way</h2>;
+          return <h3 key={key} className="price-point">$69 one way</h3>;
         case 'button':
           return (
-            <auro-hyperlink
-              key={key}
-              href={componentData[key][value.ucm_value_to_use[0]].href}
-              target="_self"
-              aria-label={componentData[key][value.ucm_value_to_use[2]].href}
-              type="cta"
-            >
-              {componentData[key][value.ucm_value_to_use[0]].title}
-            </auro-hyperlink>
+            <p className="hyperlink-wrapper" key={key}>
+              <auro-hyperlink
+                href={componentData[key][value.ucm_value_to_use[0]].href}
+                target="_self"
+                ariaLabel={componentData[key][value.ucm_value_to_use[2]].href}
+                type="cta"
+              >
+                {componentData[key][value.ucm_value_to_use[0]].title}
+              </auro-hyperlink>
+            </p>
           );
         case 'fineprint':
-          return <h5 key={key}>{componentData[key][value.ucm_value_to_use]}</h5>;
+          return <p key={key} className="fineprint">{componentData[key][value.ucm_value_to_use]}</p>;
         default:
           return null;
       }

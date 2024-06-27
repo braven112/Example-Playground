@@ -9,6 +9,10 @@ import {
 } from '../helper';
 import Skeleton from 'react-loading-skeleton';
 import { Props, Context } from '../typescript/pages';
+import '@aurodesignsystem/auro-background';
+import '@aurodesignsystem/auro-header';
+import '@aurodesignsystem/auro-button';
+import '@aurodesignsystem/auro-hyperlink';
 
 export default function Page(props: Props) {
   const { page, entryUrl } = props;
