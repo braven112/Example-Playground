@@ -72,9 +72,9 @@ export const getAlaskaPageRes = async (entryUrl) => {
 };
 
 
-export const fetchOrchestratedOffer = async () => {
+export const fetchOrchestratedOffer = async (userId) => {
   try {
-      const response = await fetch('https://dummy-offer-orchestration.vercel.app/user/user-2');
+      const response = await fetch(`https://dummy-offer-orchestration.vercel.app/user/${userId}`);
       if (response.ok) {
           const data = await response.json();
           return data;

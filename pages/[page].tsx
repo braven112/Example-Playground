@@ -41,17 +41,16 @@ export default function Page(props: Props) {
   );
 }
 
-export async function getServerSideProps({ params }: any) {
+export async function getServerSideProps(context: Context) {
   try {
-    const entryUrl = params.page.includes('/')
-      ? params.page
-      : `/${params.page}`;
-    // const pageQuery = params.query;
+    const entryUrl = context.query.page.includes('/')
+      ? context.query.page
+      : `/${context.query.page}`;
     let entryRes = await getAlaskaPageRes(entryUrl);
-    // console.log('context: ', context);
+    const userId = context.query.user;
 
-    const orchestratedOffer = await fetchOrchestratedOffer();
-    let finalEntryRes;
+    const orchestratedOffer = await fetchOrchestratedOffer(userId);
+    let finalEntryRes = entryRes;
     let copyOfEntryRes = { ...entryRes };
 
     if (orchestratedOffer) {
