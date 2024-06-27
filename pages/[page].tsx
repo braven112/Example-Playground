@@ -57,6 +57,8 @@ export async function getServerSideProps(context: Context) {
     const orchestratedOffer = await fetchOrchestratedOffer(offerId);
 
     const originalDynamicBlocks = entryRes.content_blocks;
+
+    // console.log('originalDynamicBlocks: ', originalDynamicBlocks);
     const personalizedDynamicBlocks = await personalizedBlocks(
       orchestratedOffer,
       originalDynamicBlocks
@@ -67,6 +69,8 @@ export async function getServerSideProps(context: Context) {
       ...finalEntryRes,
       content_blocks: personalizedDynamicBlocks,
     };
+
+    console.log('finalEntryRes: ', JSON.stringify(finalEntryRes));
 
     if (!finalEntryRes) throw new Error('404');
     return {
