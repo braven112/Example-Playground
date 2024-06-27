@@ -74,14 +74,9 @@ export const getAlaskaPageRes = async (entryUrl) => {
 
 export const fetchOrchestratedOffer = async () => {
   try {
-      // Fetch data from the service
       const response = await fetch('https://dummy-offer-orchestration.vercel.app/user/user-2');
-
-      // Check if the response is successful (status code 200)
       if (response.ok) {
-          // Parse the response body as JSON
           const data = await response.json();
-          console.log('Data fetched successfully:', data);
           return data;
       } else {
           console.error('Error fetching data. Status code:', response.status);

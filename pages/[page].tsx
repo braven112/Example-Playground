@@ -14,8 +14,6 @@ export default function Page(props: Props) {
   const { page, entryUrl } = props;
   const [getEntry, setEntry] = useState(page);
 
-  console.log('page: ', JSON.stringify(page));
-
   async function fetchData() {
     try {
       // const entryRes = await getAlaskaPageRes(entryUrl);
@@ -57,33 +55,25 @@ export async function getServerSideProps({ params }: any) {
     let copyOfEntryRes = { ...entryRes };
 
     if (orchestratedOffer) {
-      const modifiedFirstDynamicBlock = {
-        ...copyOfEntryRes?.content_blocks[0],
-        dynamic_block: {
-          ...copyOfEntryRes?.content_blocks[0]?.dynamic_block,
-          ucm: [orchestratedOffer],
-        },
-      };
-
-      const newContentBlocks = [
-        {
-          ...copyOfEntryRes?.content_blocks[0],
-          ...modifiedFirstDynamicBlock,
-        },
-        ...copyOfEntryRes?.content_blocks.slice(1),
-      ];
-
       finalEntryRes = {
         ...copyOfEntryRes,
-        content_blocks: newContentBlocks,
+        content_blocks: [
+          {
+            ...copyOfEntryRes.content_blocks[0],
+            dynamic_block: {
+              ...copyOfEntryRes.content_blocks[0].dynamic_block,
+              ucm: [orchestratedOffer],
+            },
+          },
+          ...copyOfEntryRes.content_blocks.slice(1),
+        ],
       };
-      copyOfEntryRes = finalEntryRes;
     }
-    if (!copyOfEntryRes) throw new Error('404');
+    if (!finalEntryRes) throw new Error('404');
     return {
       props: {
         entryUrl: entryUrl,
-        page: copyOfEntryRes,
+        page: finalEntryRes,
       },
     };
   } catch (error) {
