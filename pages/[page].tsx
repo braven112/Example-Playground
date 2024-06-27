@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { onEntryChange } from '../contentstack-sdk';
-// import RenderComponents from '../components/render-components';
 import RenderBlocks from '../components/blocks/render-blocks';
 import {
   getPageRes,
   getAlaskaPageRes,
   fetchOrchestratedOffer,
 } from '../helper';
+import { personalizedBlocks } from '../util/personalizedBlocks';
 import Skeleton from 'react-loading-skeleton';
 import { Props, Context } from '../typescript/pages';
 import '@aurodesignsystem/auro-background';
@@ -51,27 +51,23 @@ export async function getServerSideProps(context: Context) {
       ? context.query.page
       : `/${context.query.page}`;
     let entryRes = await getAlaskaPageRes(entryUrl);
-    const userId = context.query.user;
+    const offerId = context.query.offer;
 
-    const orchestratedOffer = await fetchOrchestratedOffer(userId);
+    //Fetch from dummy offer orchestration service || This would be replaced by the recommendation engine
+    const orchestratedOffer = await fetchOrchestratedOffer(offerId);
+
+    const originalDynamicBlocks = entryRes.content_blocks;
+    const personalizedDynamicBlocks = await personalizedBlocks(
+      orchestratedOffer,
+      originalDynamicBlocks
+    );
+
     let finalEntryRes = entryRes;
-    let copyOfEntryRes = { ...entryRes };
+    finalEntryRes = {
+      ...finalEntryRes,
+      content_blocks: personalizedDynamicBlocks,
+    };
 
-    if (orchestratedOffer) {
-      finalEntryRes = {
-        ...copyOfEntryRes,
-        content_blocks: [
-          {
-            ...copyOfEntryRes.content_blocks[0],
-            dynamic_block: {
-              ...copyOfEntryRes.content_blocks[0].dynamic_block,
-              ucm: [orchestratedOffer],
-            },
-          },
-          ...copyOfEntryRes.content_blocks.slice(1),
-        ],
-      };
-    }
     if (!finalEntryRes) throw new Error('404');
     return {
       props: {

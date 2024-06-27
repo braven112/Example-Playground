@@ -78,7 +78,7 @@ export type Page = {
 export type Context = {
   resolvedUrl: string;
   query: {
-    user: string;
+    offer: string;
     page: string;
   };
   setHeader: Function;
