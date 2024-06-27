@@ -3,19 +3,16 @@ import { onEntryChange } from '../contentstack-sdk';
 import RenderComponents from '../components/render-components';
 import { getPageRes, getAlaskaPageRes } from '../helper';
 import Skeleton from 'react-loading-skeleton';
-import { Props, Context } from "../typescript/pages";
+import { Props, Context } from '../typescript/pages';
 
 export default function Home(props: Props) {
-
   const { page, entryUrl } = props;
 
   const [getEntry, setEntry] = useState(page);
 
   async function fetchData() {
     try {
-      console.log('LEXI from index: ', entryUrl)
       const entryRes = await getAlaskaPageRes(entryUrl);
-      console.log('MARNEL from index: ', entryRes)
       if (!entryRes) throw new Error('Status code 404');
       setEntry(entryRes);
     } catch (error) {
@@ -30,7 +27,7 @@ export default function Home(props: Props) {
   return getEntry ? (
     <RenderComponents
       pageComponents={getEntry.page_components}
-      contentTypeUid='page'
+      contentTypeUid="page"
       entryUid={getEntry.uid}
       locale={getEntry.locale}
     />

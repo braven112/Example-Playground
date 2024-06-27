@@ -72,10 +72,10 @@ export const getAlaskaPageRes = async (entryUrl) => {
 };
 
 
-export const fetchOrchestratedOffer = async (entryUrl) => {
+export const fetchOrchestratedOffer = async () => {
   try {
       // Fetch data from the service
-      const response = await fetch('https://dummy-offer-orchestration.vercel.app/user/user-1');
+      const response = await fetch('https://dummy-offer-orchestration.vercel.app/user/user-2');
 
       // Check if the response is successful (status code 200)
       if (response.ok) {
