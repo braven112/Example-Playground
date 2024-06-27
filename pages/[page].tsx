@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { onEntryChange } from '../contentstack-sdk';
 // import RenderComponents from '../components/render-components';
 import RenderBlocks from '../components/blocks/render-blocks';
-import { getPageRes, getAlaskaPageRes } from '../helper';
+import { getPageRes, getAlaskaPageRes, fetchOrchestratedOffer } from '../helper';
 import Skeleton from 'react-loading-skeleton';
 import { Props } from "../typescript/pages";
 
@@ -41,7 +41,25 @@ export async function getServerSideProps({params}: any) {
   try {
       const entryUrl = params.page.includes('/') ? params.page:`/${params.page}`
       const entryRes = await getAlaskaPageRes(entryUrl);
+      const orchestratedOffer = await fetchOrchestratedOffer();
+      console.log('entryRes: ', JSON.stringify(entryRes));
+      // console.log('orchestratedOffer: ', orchestratedOffer);
       // const entryRes = await getPageRes(entryUrl);
+      if(orchestratedOffer){
+        console.log('params.page: ', params)
+        const firstDynamicBlock = entryRes?.content_blocks[0]?.dynamic_block;
+        const newUCM = [orchestratedOffer]
+        const modifiedFirstDynamicBlock = {
+          ...firstDynamicBlock,
+          ucm: newUCM
+        }
+
+        console.log(modifiedFirstDynamicBlock)
+
+        const allContentBlocks = entryRes?.content_blocks;
+        console.log('modifiedFirstDynamicBlock: ', JSON.stringify(modifiedFirstDynamicBlock))
+
+      }   
       if (!entryRes) throw new Error('404');
       return {
         props: {

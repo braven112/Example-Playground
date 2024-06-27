@@ -71,6 +71,26 @@ export const getAlaskaPageRes = async (entryUrl) => {
   return response[0];
 };
 
+
+export const fetchOrchestratedOffer = async (entryUrl) => {
+  try {
+      // Fetch data from the service
+      const response = await fetch('https://dummy-offer-orchestration.vercel.app/user/user-1');
+
+      // Check if the response is successful (status code 200)
+      if (response.ok) {
+          // Parse the response body as JSON
+          const data = await response.json();
+          console.log('Data fetched successfully:', data);
+          return data;
+      } else {
+          console.error('Error fetching data. Status code:', response.status);
+      }
+  } catch (error) {
+      console.error('An error occurred while fetching data:', error.message);
+  }
+};
+
 export const getBlogListRes = async () => {
   const response = await Stack.getEntry({
     contentTypeUid: 'blog_post',
