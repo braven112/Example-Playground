@@ -1438,8 +1438,8 @@ footer a {
 }
 
 .hero-block .grid-container .grid-item:first-child .description {
-  font-size: 18px;
-  line-height: 24px;
+  font-size: 22px;
+  line-height: 26px;
   margin-top: 20px;
   color: #fff;
 }
@@ -1510,15 +1510,15 @@ footer a {
   margin:15px 0;
   font-size: 24px;
 }
-
+.banner-block .grid-container .grid-item .description {
+  font-size: 22px;
+  font-weight: 200;
+}
 .banner-block .grid-container .grid-item .fineprint {
   font-size: 14px;
   font-weight: 200;
 }
-.banner-block .grid-container .grid-item .description {
-  font-size: 14px;
-  font-weight: 200;
-}
+
 
 .hyperlink-wrapper{
   margin-bottom: 30px;
