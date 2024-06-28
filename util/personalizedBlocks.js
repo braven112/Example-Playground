@@ -11,16 +11,32 @@ const personalizedBlocks = async (orchestratedOffer, originalDynamicBlocks) => {
   const personalOffersOnly = orchestratedOffer?.personalOffers;
 
 
+  for (const key in filteredDynamicBlocks) {
+    if (filteredDynamicBlocks[key]?.dynamic_block?.include_in_offer_orchestration === true){
+      filteredDynamicBlocks[key] = {
+        ...filteredDynamicBlocks[key],
+        dynamic_block: {
+          ...filteredDynamicBlocks[key].dynamic_block,
+          ucm: [personalOffersOnly[key]],
+        }
+      }
+    }
+  }
+
+  console.log('filteredDynamicBlocks', JSON.stringify(filteredDynamicBlocks));
+
+
+
   for (const key in originalDynamicBlocks) {
     //check if originalDynamicBlocks[key] is inside of filteredDynamicBlocks
-    if (filteredDynamicBlocks[key]?.dynamic_block?.include_in_offer_orchestration === false){
-      continue;
+    if (originalDynamicBlocks[key]?.dynamic_block?.include_in_offer_orchestration === false){
+      originalDynamicBlocks[key] = originalDynamicBlocks[key]
     } else {
       originalDynamicBlocks[key] = {
         ...originalDynamicBlocks[key],
         dynamic_block: {
           ...originalDynamicBlocks[key].dynamic_block,
-          ucm: [personalOffersOnly[key] ? personalOffersOnly[key] : personalOffersOnly[key - 1]],
+          ucm: [key > filteredDynamicBlocks.length ? filteredDynamicBlocks[key - 1]?.dynamic_block.ucm[0] : filteredDynamicBlocks[key]?.dynamic_block.ucm[0]],
         }
       }
     }
