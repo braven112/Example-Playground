@@ -1,48 +1,26 @@
 const personalizedBlocks = async (orchestratedOffer, originalDynamicBlocks) => {
 
-  const filteredDynamicBlocks = originalDynamicBlocks.filter(
-    (block) =>
-      block?.dynamic_block?.include_in_offer_orchestration === true
-  );
-  // console.log('ORIGINAL filteredDynamicBlocks', JSON.stringify(filteredDynamicBlocks))
+  //Return originalDynamicBlocks with Default Offers if orchestration service doesnt return any personalized offers
+  if (!orchestratedOffer) return originalDynamicBlocks;
 
-  if(!orchestratedOffer) return originalDynamicBlocks;
-
+  //Save just the personalOffers array
   const personalOffersOnly = orchestratedOffer?.personalOffers;
-
-
-  for (const key in filteredDynamicBlocks) {
-    if (filteredDynamicBlocks[key]?.dynamic_block?.include_in_offer_orchestration === true){
-      filteredDynamicBlocks[key] = {
-        ...filteredDynamicBlocks[key],
-        dynamic_block: {
-          ...filteredDynamicBlocks[key].dynamic_block,
-          ucm: [personalOffersOnly[key]],
-        }
-      }
-    }
-  }
-
-  console.log('filteredDynamicBlocks', JSON.stringify(filteredDynamicBlocks));
-
-
-
+  
+  //Loops through the original blocks that are opted in to be replaced by personalized offer and swap out the campaign thats inside of the block
+  //Configuration for each Opted-In Dynamic Blocks are unchanged.
   for (const key in originalDynamicBlocks) {
-    //check if originalDynamicBlocks[key] is inside of filteredDynamicBlocks
-    if (originalDynamicBlocks[key]?.dynamic_block?.include_in_offer_orchestration === false){
-      originalDynamicBlocks[key] = originalDynamicBlocks[key]
-    } else {
+    if (originalDynamicBlocks[key]?.dynamic_block?.include_in_offer_orchestration === true) {
       originalDynamicBlocks[key] = {
         ...originalDynamicBlocks[key],
         dynamic_block: {
           ...originalDynamicBlocks[key].dynamic_block,
-          ucm: [key > filteredDynamicBlocks.length ? filteredDynamicBlocks[key - 1]?.dynamic_block.ucm[0] : filteredDynamicBlocks[key]?.dynamic_block.ucm[0]],
+          ucm: [personalOffersOnly.shift()] || [...originalDynamicBlocks[key].dynamic_block.ucm],
         }
       }
     }
   }
 
-  console.log('originalDynamicBlocks', JSON.stringify(originalDynamicBlocks));
+  //Return the modified dynamic blocks
   return originalDynamicBlocks;
 
 };

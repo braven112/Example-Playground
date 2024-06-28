@@ -58,21 +58,21 @@ export async function getServerSideProps(context: Context) {
 
     const originalDynamicBlocks = entryRes.content_blocks;
 
-    // console.log('originalDynamicBlocks: ', originalDynamicBlocks);
+    //This function combines ochestratedOffers to the originalDynamicBLocks
     const personalizedDynamicBlocks = await personalizedBlocks(
       orchestratedOffer,
       originalDynamicBlocks
     );
 
     let finalEntryRes = entryRes;
+    //Spread the original response and replace the content_blocks with the personalized content_blocks
     finalEntryRes = {
       ...finalEntryRes,
       content_blocks: personalizedDynamicBlocks,
     };
 
-    console.log('finalEntryRes: ', JSON.stringify(finalEntryRes));
-
     if (!finalEntryRes) throw new Error('404');
+
     return {
       props: {
         entryUrl: entryUrl,
