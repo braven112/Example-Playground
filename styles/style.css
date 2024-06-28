@@ -1390,7 +1390,7 @@ footer a {
 
 
 /* HERO BLOCK STYLING */
-.heroblock {
+.hero-block {
   container-type: inline-size;
   width: 100%;
   margin: 0 auto 0 auto;
@@ -1401,7 +1401,7 @@ footer a {
   background-position: 100% 60%;
 }
 
-.heroblock .grid-container {
+.hero-block .grid-container {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
@@ -1413,23 +1413,23 @@ footer a {
   font-weight: 200;
 }
 
-.heroblock .grid-container .grid-item:first-child {
+.hero-block .grid-container .grid-item:first-child {
   background-color: #0C2747;
   padding: 5%;
 }
 
-.heroblock .grid-container .grid-item:first-child .teaser{
+.hero-block .grid-container .grid-item:first-child .teaser{
   font-size: 25px;
   margin-bottom: 20px;
 }
 
-.heroblock .grid-container .grid-item:first-child .headline{
+.hero-block .grid-container .grid-item:first-child .headline{
   font-size: 46px;
   line-height: 45px;
   font-weight: 200;
 }
 
-.heroblock .grid-container .grid-item:first-child .price-point{
+.hero-block .grid-container .grid-item:first-child .price-point{
   font-size: 36px;
   margin: 30px 0 10px;
   line-height: 50px;
@@ -1437,21 +1437,21 @@ footer a {
   font-weight: 200;
 }
 
-.heroblock .grid-container .grid-item:first-child .description {
+.hero-block .grid-container .grid-item:first-child .description {
   font-size: 18px;
   line-height: 24px;
   margin-top: 20px;
   color: #fff;
 }
 
-.heroblock .grid-container .grid-item:first-child .fineprint{
+.hero-block .grid-container .grid-item:first-child .fineprint{
   font-size: 14px;
   font-weight: 200;
   color: #fff;
 }
 
 @container (max-width: 768px) {
-  .heroblock .grid-container {
+  .hero-block .grid-container {
     grid-template-columns: 1fr;
     margin: 80px 0;
   }
@@ -1539,3 +1539,31 @@ footer a {
   }
 }
 /* BANNER BLOCK STYLING */
+/* STATIC BLOCK STYLING */
+.static.static-block {
+  width: 100%;
+}
+
+.static.static-block .block-wrapper{
+  max-width: 1232px;
+  margin: auto;
+  padding: 0 20px;
+  text-align: center;
+}
+.static.static-block .block-wrapper .teaser {
+  margin: 40px 0 0 0;
+}
+.static.static-block .block-wrapper .headline {
+  font-weight: 200;
+  font-size: 46px;
+  margin: 30px 0 20px 0;
+}
+.static.static-block .block-wrapper .subheadline {
+  font-weight: 200;
+  font-size: 36px;
+  margin: 20px 0 30px 0;
+}
+.static.static-block .block-wrapper .description {
+  font-size: 18px;
+}
+/* STATIC BLOCK STYLING */

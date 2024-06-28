@@ -11,7 +11,7 @@ export default function BannerBlock(props: DynamicBlock) {
   const { ucm_value_to_use } = media.media;
 
   return (
-    <div className="banner-block">
+    <div className="dynamic banner-block">
       <div className="grid-container">
         <div className="grid-item">
           {ucmDataHandler(remainingFields, ucm[0])}

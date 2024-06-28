@@ -175,6 +175,67 @@ export type Component = {
   our_team?: TeamProps;
   widget?: Widget;
   dynamic_block?: DynamicBlock;
+  static_block?: StaticBlockProp;
+};
+
+export type StaticBlockProp = {
+  alias?: string;
+  configuration: [ContentModelConfiguration];
+  teaser: {
+    teaser_icon: ContentstackImage;
+    teaser_headline: string;
+    teaser_subheadline: string;
+    teaser_copy: string;
+  };
+  headline: {
+    ucm_value_to_use?: any;
+    lg_headline: string;
+    md_headline: string;
+    sm_headline: string;
+    xs_headline: string;
+  };
+  subheadline: {
+    lg_subheadline: string;
+    md_subheadline: string;
+    sm_subheadline: string;
+    xs_subheadline: string;
+  };
+  description: {
+    lg_description: string;
+    md_description: string;
+    sm_description: string;
+    xs_description: string;
+  };
+  fineprint: {
+    lg_fineprint: string;
+    md_fineprint: string;
+    sm_fineprint: string;
+    xs_fineprint: string;
+  };
+  media: {
+    primary: ContentstackImage;
+    secondary: ContentstackImage;
+  };
+  button: {
+    aria_label: string;
+    link: {
+      title: string;
+      href: string;
+    };
+  };
+  hyperlink: {
+    aria_label: string;
+    role: string;
+    link: {
+      title: string;
+      href: string;
+    };
+  };
+  related_campaigns: {
+    campaign: [UniversalContentModel];
+  };
+  items: [Items];
+  icons: [Icons];
 };
 
 export type DynamicBlock = {

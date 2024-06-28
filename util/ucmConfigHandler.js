@@ -18,5 +18,23 @@ const ucmConfigHandler = fieldsOrder => {
   
     return { media, remainingFields };
   };
+
+
+  const reduceConfig = fieldsOrder => {
+    //Seperates media from other fields in the fieldsOrder array
+    const { remainingFields } = fieldsOrder.reduce(
+      (acc, field) => {
+        const fieldKey = Object.keys(field)[0];
+        const fieldValue = Object.values(field)[0];
   
-  module.exports = { ucmConfigHandler };
+        acc.remainingFields[fieldKey] = fieldValue;
+  
+        return acc;
+      },
+      { remainingFields: {} }
+    );
+  
+    return { remainingFields };
+  };
+  
+  module.exports = { ucmConfigHandler, reduceConfig };

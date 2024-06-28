@@ -1,11 +1,12 @@
 
 const ucmDataHandler = (remainingFields, componentData) => {
+
     return Object.entries(remainingFields).map(([key, value]) => {
       switch (key) {
         case 'teaser':
-          return (
-            <span key={key} className="teaser">{componentData[key][value.ucm_value_to_use]}</span>
-          );
+          return key === 'teaser'
+          ? <img key={key} className="teaser" src={`${componentData[key][value.ucm_value_to_use].url}`} /> 
+          : <span key={key} className="teaser">{componentData[key][value.ucm_value_to_use]}</span>;
         case 'headline':
           return <h1 key={key} className="headline">{componentData[key][value.ucm_value_to_use]}</h1>;
         case 'subheadline':

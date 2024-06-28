@@ -12,7 +12,7 @@ export default function HeroBlock(props: DynamicBlock) {
 
   return (
     <div
-      className="heroblock"
+      className="dynamic hero-block"
       style={{
         backgroundImage: `url("${
           ucm_value_to_use == 'primary'

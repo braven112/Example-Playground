@@ -63,6 +63,7 @@ export const getAlaskaPageRes = async (entryUrl) => {
     referenceFieldPath: [
       'content_blocks.dynamic_block.ucm',
       'content_blocks.dynamic_block.configuration',
+      'content_blocks.static_block.configuration',
       'content_blocks.dynamic_block.ucm.related_campaigns.campaign',
     ],
     jsonRtePath: [],

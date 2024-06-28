@@ -20,6 +20,7 @@ const personalizedBlocks = async (orchestratedOffer, originalDynamicBlocks) => {
     }
   }
 
+  // console.log('originalDynamicBlocks: ', JSON.stringify(originalDynamicBlocks));
   //Return the modified dynamic blocks
   return originalDynamicBlocks;
 

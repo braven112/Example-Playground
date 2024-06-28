@@ -53,15 +53,15 @@ export async function getServerSideProps(context: Context) {
     let entryRes = await getAlaskaPageRes(entryUrl);
     const offerId = context.query.offer;
 
+    // console.log('entryRes: ', JSON.stringify(entryRes.content_blocks));
+
     //Fetch from dummy offer orchestration service || This would be replaced by the recommendation engine
     const orchestratedOffer = await fetchOrchestratedOffer(offerId);
-
-    const originalDynamicBlocks = entryRes.content_blocks;
 
     //This function combines ochestratedOffers to the originalDynamicBLocks
     const personalizedDynamicBlocks = await personalizedBlocks(
       orchestratedOffer,
-      originalDynamicBlocks
+      entryRes.content_blocks
     );
 
     let finalEntryRes = entryRes;
