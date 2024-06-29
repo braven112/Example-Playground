@@ -61,10 +61,11 @@ export const getAlaskaPageRes = async (entryUrl) => {
     contentTypeUid: 'alaska_airlines',
     entryUrl,
     referenceFieldPath: [
-      'content_blocks.dynamic_block.ucm',
+      'content_blocks.dynamic_block.data',
       'content_blocks.dynamic_block.configuration',
-      'content_blocks.static_block.configuration',
-      'content_blocks.dynamic_block.ucm.related_campaigns.campaign',
+      'content_blocks.dynamic_block.data.related_campaigns.campaign',
+      'content_blocks.generic_block.configuration',
+      'content_blocks.generic_block.data',
     ],
     jsonRtePath: [],
   });

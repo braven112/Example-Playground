@@ -1,8 +1,8 @@
 import React from 'react';
 import HeroBlock from '../ucm-components/hero-block';
 import BannerBlock from '../ucm-components/banner-block';
-import StaticBlock from '../ucm-components/static-block';
-import { RenderProps } from "../../typescript/component";
+import GenericBlock from '../ucm-components/generic-block';
+import { RenderProps } from '../../typescript/component';
 
 export default function RenderBlocks(props: RenderProps) {
   const { pageComponents, entryUid, contentTypeUid, locale } = props;
@@ -13,15 +13,26 @@ export default function RenderBlocks(props: RenderProps) {
       data-locale={locale}
     >
       {pageComponents?.map((component, key: number) => {
-        //StaticBlock Handler
-        if (component.static_block?.configuration[0]?.component_name === 'AS_ASCOM_Static_Block') {
+        //GenericBlock Handler
+        if (
+          component.generic_block?.configuration[0]?.component_name ===
+          'AS_ASCOM_Generic_Block'
+        ) {
           return (
-            <StaticBlock {...component.static_block} key={`component-${key}`} />
+            <GenericBlock
+              {...component.generic_block}
+              // data={component.generic_block.data[0]}
+              // configuration={component.generic_block.configuration[0]}
+              key={`component-${key}`}
+            />
           );
         }
-        //StaticBlock Handler
+        //GenericBlock Handler
         //HeroBlock Component
-        if (component.dynamic_block?.configuration[0]?.component_name === 'AS_ASCOM_Homepage_Primary_Merchandising_Flight-Deal') {
+        if (
+          component.dynamic_block?.configuration[0]?.component_name ===
+          'AS_ASCOM_Homepage_Primary_Merchandising_Flight-Deal'
+        ) {
           return (
             <HeroBlock {...component.dynamic_block} key={`component-${key}`} />
           );
@@ -29,9 +40,15 @@ export default function RenderBlocks(props: RenderProps) {
         //HeroBlock Component
 
         //BannerBlock Component
-        if (component.dynamic_block?.configuration[0]?.component_name === 'AS_ASCOM_Homepage_Secondary_Merchandising_Flight-Deal') {
+        if (
+          component.dynamic_block?.configuration[0]?.component_name ===
+          'AS_ASCOM_Homepage_Secondary_Merchandising_Flight-Deal'
+        ) {
           return (
-            <BannerBlock {...component.dynamic_block} key={`component-${key}`} />
+            <BannerBlock
+              {...component.dynamic_block}
+              key={`component-${key}`}
+            />
           );
         }
         //BannerBlock Component

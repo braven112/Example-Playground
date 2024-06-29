@@ -106,8 +106,64 @@ type Icons = {
   icon_link: string;
 };
 
+export type GenericContent = {
+  title: string;
+  url: string;
+  generic_content: [
+    {
+      teaser: {
+        text: string;
+        media: [ContentstackImage];
+      };
+      headline: {
+        text: string;
+      };
+      subheadline: {
+        text: string;
+      };
+      description: {
+        text: string;
+      };
+      fineprint: {
+        text: string;
+      };
+      icons: {
+        media: [ContentstackImage];
+      };
+      hyperlink: {
+        link: {
+          title: string;
+          href: string;
+        };
+      };
+      button: {
+        link: {
+          title: string;
+          href: string;
+        };
+      };
+      list_items: {
+        items: [
+          {
+            text: string;
+            media: [ContentstackImage];
+            link: {
+              title: string;
+              href: string;
+            };
+          }
+        ];
+      };
+      related_campaigns: {
+        campaign: [UniversalContentModel];
+      };
+    }
+  ];
+};
+
 export type UniversalContentModel = {
   title: string;
+  url: string;
   teaser: {
     teaser_icon: ContentstackImage;
     teaser_headline: string;
@@ -175,73 +231,19 @@ export type Component = {
   our_team?: TeamProps;
   widget?: Widget;
   dynamic_block?: DynamicBlock;
-  static_block?: StaticBlockProp;
+  generic_block?: GenericBlockProp;
 };
 
-export type StaticBlockProp = {
+export type GenericBlockProp = {
   alias?: string;
   configuration: [ContentModelConfiguration];
-  teaser: {
-    teaser_icon: ContentstackImage;
-    teaser_headline: string;
-    teaser_subheadline: string;
-    teaser_copy: string;
-  };
-  headline: {
-    ucm_value_to_use?: any;
-    lg_headline: string;
-    md_headline: string;
-    sm_headline: string;
-    xs_headline: string;
-  };
-  subheadline: {
-    lg_subheadline: string;
-    md_subheadline: string;
-    sm_subheadline: string;
-    xs_subheadline: string;
-  };
-  description: {
-    lg_description: string;
-    md_description: string;
-    sm_description: string;
-    xs_description: string;
-  };
-  fineprint: {
-    lg_fineprint: string;
-    md_fineprint: string;
-    sm_fineprint: string;
-    xs_fineprint: string;
-  };
-  media: {
-    primary: ContentstackImage;
-    secondary: ContentstackImage;
-  };
-  button: {
-    aria_label: string;
-    link: {
-      title: string;
-      href: string;
-    };
-  };
-  hyperlink: {
-    aria_label: string;
-    role: string;
-    link: {
-      title: string;
-      href: string;
-    };
-  };
-  related_campaigns: {
-    campaign: [UniversalContentModel];
-  };
-  items: [Items];
-  icons: [Icons];
+  data: [GenericContent];
 };
 
 export type DynamicBlock = {
   alias: string;
   configuration: [ContentModelConfiguration];
-  ucm: [UniversalContentModel];
+  data: [UniversalContentModel];
   include_in_offer_orchestration: boolean;
   $: AdditionalParam;
 };

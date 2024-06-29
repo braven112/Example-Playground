@@ -14,7 +14,7 @@ const personalizedBlocks = async (orchestratedOffer, originalDynamicBlocks) => {
         ...originalDynamicBlocks[key],
         dynamic_block: {
           ...originalDynamicBlocks[key].dynamic_block,
-          ucm: (personalOffersOnly.length > 0 ? [personalOffersOnly.shift()] : [...originalDynamicBlocks[key].dynamic_block.ucm]) || [...originalDynamicBlocks[key].dynamic_block.ucm],
+          data: (personalOffersOnly.length > 0 ? [personalOffersOnly.shift()] : [...originalDynamicBlocks[key].dynamic_block.data]) || [...originalDynamicBlocks[key].dynamic_block.data],
         }
       }
     }
