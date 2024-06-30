@@ -1,6 +1,6 @@
 import React from 'react';
-import { GenericBlockProp } from '../../typescript/component';
-import { reduceConfig } from '../../util/ucmConfigHandler';
+import { GenericBlockProp, Link } from '../../typescript/component';
+import { reduceConfig, reduceData } from '../../util/ucmConfigHandler';
 import { ucmDataHandler } from '../../util/ucmDataHandler';
 
 export default function GenericBlock(props: GenericBlockProp) {
@@ -24,15 +24,33 @@ export default function GenericBlock(props: GenericBlockProp) {
   // };
 
   const { remainingFields } = reduceConfig(configuration[0]?.directives);
+  const { dataObjects } = reduceData(data[0]?.generic_content);
 
   // console.log('newData: ', newData);
-  console.log('remainingFields: ', remainingFields);
+  console.log('dataObjects: ', JSON.stringify(dataObjects));
+
+
+  const createIcons = (iconsArray: []) => {
+    return iconsArray.map((icon : any) => {
+      return (<div key={icon.title} className="icon" ><img  src={icon.url} alt="" /></div>);
+    })
+  }
+
+  const createHyperlink = (linkObject: Link) => {
+    return (<p className="hyperlink" ><a href={linkObject?.href} target="_blank">{linkObject?.title}</a></p>);
+  }
 
   return (
     <div className="static static-block">
       <div className="block-wrapper">
-        {/* {ucmDataHandler(remainingFields, data)} */}
-        GENERIC BLOCK
+        {
+          Object.entries(remainingFields).map(([key]) => {
+            if(!dataObjects[key]) return null;
+            if(key === 'icons') return createIcons(dataObjects[key]?.media);
+            if(key === 'hyperlink') return createHyperlink(dataObjects[key]);
+            return(<div key={key} className={key} dangerouslySetInnerHTML={{__html: dataObjects[key]?.text}} />)
+          })
+        }
       </div>
     </div>
   );

@@ -56,7 +56,7 @@ export async function getServerSideProps(context: Context) {
     // console.log('entryRes: ', JSON.stringify(entryRes.content_blocks));
 
     //Fetch from dummy offer orchestration service || This would be replaced by the recommendation engine
-    const orchestratedOffer = await fetchOrchestratedOffer(offerId);
+    const orchestratedOffer = await fetchOrchestratedOffer(offerId.toLowerCase());
 
     //This function combines ochestratedOffers to the originalDynamicBLocks
     const personalizedDynamicBlocks = await personalizedBlocks(

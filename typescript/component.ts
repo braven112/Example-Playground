@@ -106,6 +106,11 @@ type Icons = {
   icon_link: string;
 };
 
+export type Link = {
+  title: string;
+  href: string;
+};
+
 export type GenericContent = {
   title: string;
   url: string;
@@ -131,26 +136,17 @@ export type GenericContent = {
         media: [ContentstackImage];
       };
       hyperlink: {
-        link: {
-          title: string;
-          href: string;
-        };
+        link: Link;
       };
       button: {
-        link: {
-          title: string;
-          href: string;
-        };
+        link: Link;
       };
       list_items: {
         items: [
           {
             text: string;
             media: [ContentstackImage];
-            link: {
-              title: string;
-              href: string;
-            };
+            link: Link;
           }
         ];
       };
@@ -200,18 +196,12 @@ export type UniversalContentModel = {
   };
   button: {
     aria_label: string;
-    link: {
-      title: string;
-      href: string;
-    };
+    link: Link;
   };
   hyperlink: {
     aria_label: string;
     role: string;
-    link: {
-      title: string;
-      href: string;
-    };
+    link: Link;
   };
   related_campaigns: {
     campaign: [UniversalContentModel];

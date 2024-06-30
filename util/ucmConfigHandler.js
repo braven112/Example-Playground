@@ -36,5 +36,21 @@ const ucmConfigHandler = fieldsOrder => {
   
     return { remainingFields };
   };
+
+  const reduceData = dataArray => {
+    const { dataObjects } = dataArray.reduce(
+      (acc, field) => {
+        const fieldKey = Object.keys(field)[0];
+        const fieldValue = Object.values(field)[0];
   
-  module.exports = { ucmConfigHandler, reduceConfig };
+        acc.dataObjects[fieldKey] = fieldValue;
+  
+        return acc;
+      },
+      { dataObjects: {} }
+    );
+  
+    return { dataObjects };
+  };
+  
+  module.exports = { ucmConfigHandler, reduceConfig, reduceData };
