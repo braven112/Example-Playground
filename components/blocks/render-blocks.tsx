@@ -4,6 +4,7 @@ import BannerBlock from '../ucm-components/banner-block';
 import GenericBlock from '../ucm-components/generic-block';
 import { RenderProps } from '../../typescript/component';
 import FlightDealsBanner from '../ucm-components/FlightDealsBanner';
+import FlightDealsHero from '../ucm-components/FlightDealsHero';
 
 export default function RenderBlocks(props: RenderProps) {
   const { pageComponents, entryUid, contentTypeUid, locale } = props;
@@ -29,10 +30,21 @@ export default function RenderBlocks(props: RenderProps) {
           );
         }
         //GenericBlock Handler
-        //HeroBlock Component
+        //FlightDealsHero Component
         if (
           component.dynamic_block?.configuration[0]?.component_name ===
           'AS_ASCOM_Homepage_Primary_Merchandising_Flight-Deal'
+        ) {
+          return (
+            <FlightDealsHero {...component.dynamic_block} key={`component-${key}`} />
+          );
+        }
+        //FlightDealsHero Component
+
+        //HeroBlock Component
+        if (
+          component.dynamic_block?.configuration[0]?.component_name ===
+          'AS_ASCOM_Homepage_Primary_Merchandising_Partners'
         ) {
           return (
             <HeroBlock {...component.dynamic_block} key={`component-${key}`} />

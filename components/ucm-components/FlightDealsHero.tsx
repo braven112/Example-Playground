@@ -3,7 +3,7 @@ import { DynamicBlock } from '../../typescript/component';
 import { ucmConfigHandler } from '../../util/ucmConfigHandler';
 import { ucmDataHandler } from '../../util/ucmDataHandler';
 
-export default function HeroBlock(props: DynamicBlock) {
+export default function FlightDealsHero(props: DynamicBlock) {
   const { data, configuration, priceIncluded } = props;
   const { media, remainingFields } = ucmConfigHandler(
     configuration[0]?.directives
@@ -24,10 +24,10 @@ export default function HeroBlock(props: DynamicBlock) {
       }}
     >
       <div className="grid-container">
-        <div className="grid-item"></div>
         <div className="grid-item">
           {ucmDataHandler(remainingFields, data[0])}
         </div>
+        <div className="grid-item"></div>
       </div>
     </div>
   );
