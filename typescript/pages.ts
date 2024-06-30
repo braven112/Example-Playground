@@ -55,8 +55,28 @@ type Blog = {
   $: AdditionalParam;
 };
 
+export type FlightDeals = {
+  dealCode?: string;
+  showAsDefault?: boolean;
+  originShort?: string;
+  origin?: string;
+  destinationShort?: string;
+  destination?: string;
+  purchaseBy?: string;
+  saverRevenue?: number;
+  mainRevenue?: number;
+  miles?: number;
+  fee?: number;
+  activate?: Date;
+  deactivate?: Date;
+  startDate?: Date;
+  endDate?: Date;
+  fareRules?: string;
+}
+
 export type Props = {
   page: Page;
+  flightDeals?: FlightDeals;
   entryUrl: string;
   Component: Function;
   entries: Entry;

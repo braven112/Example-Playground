@@ -78,8 +78,9 @@ export type ContentModelConfiguration = {
   $: AdditionalParam;
 };
 
-type ContentstackImage = {
+export type ContentstackImage = {
   content_type: string;
+  title: string;
   filename: string;
   url: string;
   uid: string;
@@ -160,6 +161,7 @@ export type GenericContent = {
 export type UniversalContentModel = {
   title: string;
   url: string;
+  includePrice?: boolean;
   teaser: {
     teaser_icon: ContentstackImage;
     teaser_headline: string;
@@ -235,6 +237,7 @@ export type DynamicBlock = {
   configuration: [ContentModelConfiguration];
   data: [UniversalContentModel];
   include_in_offer_orchestration: boolean;
+  priceIncluded?: boolean;
   $: AdditionalParam;
 };
 

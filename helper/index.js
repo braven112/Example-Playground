@@ -88,6 +88,21 @@ export const fetchOrchestratedOffer = async (offerId) => {
   }
 };
 
+export const fetchFlightDeals = async (origin, destination) => {
+  try {
+      const response = await fetch(`https://dummy-offer-orchestration.vercel.app/flight-deals/${origin}/${destination}`);
+      // const response = await fetch(`https://dummy-offer-orchestration.vercel.app/flight-deals`);
+      if (response.ok) {
+          const data = await response.json();
+          return data;
+      } else {
+          console.error('Error fetching data. Status code:', response.status);
+      }
+  } catch (error) {
+      console.error('An error occurred while fetching data:', error.message);
+  }
+};
+
 export const getBlogListRes = async () => {
   const response = await Stack.getEntry({
     contentTypeUid: 'blog_post',

@@ -5,6 +5,7 @@ import {
   getPageRes,
   getAlaskaPageRes,
   fetchOrchestratedOffer,
+  fetchFlightDeals,
 } from '../helper';
 import { personalizedBlocks } from '../util/personalizedBlocks';
 import Skeleton from 'react-loading-skeleton';
@@ -15,8 +16,10 @@ import '@aurodesignsystem/auro-button';
 import '@aurodesignsystem/auro-hyperlink';
 
 export default function Page(props: Props) {
-  const { page, entryUrl } = props;
+  const { page, entryUrl, flightDeals } = props;
   const [getEntry, setEntry] = useState(page);
+
+  // console.log('Flight Deals from FE: ', flightDeals)
 
   async function fetchData() {
     try {
@@ -53,15 +56,19 @@ export async function getServerSideProps(context: Context) {
     let entryRes = await getAlaskaPageRes(entryUrl);
     const offerId = context.query.offer;
 
-    // console.log('entryRes: ', JSON.stringify(entryRes.content_blocks));
+    // console.log('entryRes: ', JSON.stringify(entryRes));
 
     //Fetch from dummy offer orchestration service || This would be replaced by the recommendation engine
     const orchestratedOffer = await fetchOrchestratedOffer(offerId.toLowerCase());
 
+    const flightDealsData = await fetchFlightDeals('alw', 'sea');
+    // console.log('FLIGHT DEALS: ', flightDealsData);
+
     //This function combines ochestratedOffers to the originalDynamicBLocks
     const personalizedDynamicBlocks = await personalizedBlocks(
       orchestratedOffer,
-      entryRes.content_blocks
+      entryRes.content_blocks,
+      flightDealsData
     );
 
     let finalEntryRes = entryRes;
@@ -77,6 +84,7 @@ export async function getServerSideProps(context: Context) {
       props: {
         entryUrl: entryUrl,
         page: finalEntryRes,
+        flightDeals: flightDealsData,
       },
     };
   } catch (error) {

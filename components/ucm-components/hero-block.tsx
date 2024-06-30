@@ -4,7 +4,7 @@ import { ucmConfigHandler } from '../../util/ucmConfigHandler';
 import { ucmDataHandler } from '../../util/ucmDataHandler';
 
 export default function HeroBlock(props: DynamicBlock) {
-  const { data, configuration } = props;
+  const { data, configuration, priceIncluded } = props;
   const { media, remainingFields } = ucmConfigHandler(
     configuration[0]?.directives
   );

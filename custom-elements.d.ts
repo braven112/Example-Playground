@@ -17,16 +17,22 @@ declare namespace JSX {
     'auro-hyperlink': React.DetailedHTMLProps<
       React.AnchorHTMLAttributes<HTMLAnchorElement> & {
         cta?: string;
-        href: string;
-        target: string;
-        ariaLabel: string;
-        type: string;
-        className: string;
+        href?: string;
+        target?: string;
+        ariaLabel?: string;
+        type?: string;
+        className?: string;
       },
       HTMLAnchorElement
     >;
     'auro-button': React.DetailedHTMLProps<
-      React.AnchorHTMLAttributes<HTMLAnchorElement> & { cta?: boolean },
+      React.AnchorHTMLAttributes<HTMLAnchorElement> & { 
+        cta?: boolean;
+        onclick?: string;
+        loading?: boolean;
+        disabled?: boolean;
+        variant?: string;
+      },
       HTMLAnchorElement
     >;
   }

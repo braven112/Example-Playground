@@ -1495,7 +1495,7 @@ footer a {
 
 .banner-block .grid-container .grid-item .headline {
   font-size: 40px;
-  margin-top: 0px;
+  margin: 0px 0 10px 0;
   font-weight: 200;
 }
 
@@ -1557,6 +1557,7 @@ footer a {
   font-weight: 200;
   font-size: 46px;
   margin: 30px 0 20px 0;
+  line-height: 46px;
 }
 .static.static-block .block-wrapper .subheadline {
   font-weight: 200;
