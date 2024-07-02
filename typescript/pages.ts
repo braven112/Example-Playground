@@ -74,6 +74,14 @@ export type FlightDeals = {
   fareRules?: string;
 }
 
+export type OptimizelyDataObject = {
+  userId: string;
+  decision_enabled: boolean;
+  variationKey: string;
+  sortMethod: string;
+  decision_ruleKey: string;
+}
+
 export type Props = {
   page: Page;
   flightDeals?: FlightDeals;
@@ -83,6 +91,7 @@ export type Props = {
   pageProps: PageProps;
   header: HeaderProps;
   footer: FooterProps;
+  optimizelyDecision: OptimizelyDataObject;
 };
 
 export type Page = {
@@ -104,6 +113,7 @@ export type Context = {
   setHeader: Function;
   write: Function;
   end: Function;
+  optimizelyDecision: OptimizelyDataObject;
 };
 
 export type Pages = [page: Page];

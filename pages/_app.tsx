@@ -10,6 +10,7 @@ import '../styles/style.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '@contentstack/live-preview-utils/dist/main.css';
 import { Props } from "../typescript/pages";
+import { optimizelyFeatureExperimentation } from '../util/optimizelyInitialize'
 
 
 Router.events.on('routeChangeStart', () => NProgress.start());
@@ -17,8 +18,20 @@ Router.events.on('routeChangeComplete', () => NProgress.done());
 Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp(props: Props) {
-  const { Component, pageProps, header, footer, entries } = props;
+  const { Component, pageProps, header, footer, entries, optimizelyDecision } = props;
   const { page, posts, archivePost, blogPost } = pageProps;
+
+
+
+  // const {
+  //   userId,
+  //   decision_enabled,
+  //   decision_ruleKey,
+  //   variationKey,
+  //   sortMethod,
+  // } = optimizelyDecision;
+
+  console.log('optimizelyDecision: ', optimizelyDecision);
 
   const metaData = (seo: any) => {
     const metaArr = [];
@@ -64,6 +77,7 @@ function MyApp(props: Props) {
         blogPost={blogPost}
         blogList={blogList}
         entries={entries}
+        // optimizelyDecision={optimizelyDecision}
       >
         <Component {...pageProps} />
       </Layout>
@@ -72,12 +86,22 @@ function MyApp(props: Props) {
 }
 
 MyApp.getInitialProps = async (appContext: any) => {
+
   const appProps = await App.getInitialProps(appContext);
   const header = await getHeaderRes();
   const footer = await getFooterRes();
   const entries = await getAllEntries();
 
-  return { ...appProps, header, footer, entries };
+  const optimizelyDecision = await optimizelyFeatureExperimentation();
+  
+  console.log('appProps: ', appProps);
+
+  const newAppProps = {
+    ...appProps,
+    optimizelyDecision: optimizelyDecision
+  }
+
+  return { ...newAppProps, header, footer, entries };
 };
 
 export default MyApp;

@@ -16,10 +16,10 @@ import '@aurodesignsystem/auro-button';
 import '@aurodesignsystem/auro-hyperlink';
 
 export default function Page(props: Props) {
-  const { page, entryUrl, flightDeals } = props;
+  const { page, entryUrl, flightDeals, optimizelyDecision } = props;
   const [getEntry, setEntry] = useState(page);
 
-  // console.log('Flight Deals from FE: ', flightDeals)
+  console.log('optimizelyDecision from FE: ', optimizelyDecision)
 
   async function fetchData() {
     try {
@@ -55,8 +55,6 @@ export async function getServerSideProps(context: Context) {
       : `/${context.query.page}`;
     let entryRes = await getAlaskaPageRes(entryUrl);
     const offerId = context.query.offer;
-
-    // console.log('entryRes: ', JSON.stringify(entryRes));
 
     //Fetch from dummy offer orchestration service || This would be replaced by the recommendation engine
     const orchestratedOffer = await fetchOrchestratedOffer(offerId.toLowerCase());
