@@ -17,12 +17,12 @@ const ucmDataHandler = (remainingFields, componentData) => {
               ${componentData[key][value.ucm_value_to_use[0]].title}
             </auro-hyperlink>
           `}} />
-      if(key === 'price') 
+      if(key === 'price' && componentData["lowestFare"])
         return(
           <h3 key={key} className="price-point" dangerouslySetInnerHTML={{__html: `
               ${value.ucm_value_to_use === 'miles' 
-                ? `${componentData["lowestFare"][value.ucm_value_to_use]} miles one way` 
-                : `$${componentData["lowestFare"][value.ucm_value_to_use]} one way`}
+                ? `${componentData["lowestFare"][value?.ucm_value_to_use]} miles one way`  || ''
+                : `$${componentData["lowestFare"][value?.ucm_value_to_use]} one way` || ''} 
           `}} />
         )
       return null;
