@@ -14,12 +14,13 @@ import '@aurodesignsystem/auro-background';
 import '@aurodesignsystem/auro-header';
 import '@aurodesignsystem/auro-button';
 import '@aurodesignsystem/auro-hyperlink';
+import { optimizelyFeatureExperimentation } from '../util/optimizelyInitialize';
 
 export default function Page(props: Props) {
   const { page, entryUrl, flightDeals, optimizelyDecision } = props;
   const [getEntry, setEntry] = useState(page);
 
-  console.log('optimizelyDecision from FE: ', optimizelyDecision)
+  // console.log('optimizelyDecision from FE: ', optimizelyDecision);
 
   async function fetchData() {
     try {
@@ -56,11 +57,16 @@ export async function getServerSideProps(context: Context) {
     let entryRes = await getAlaskaPageRes(entryUrl);
     const offerId = context.query.offer;
 
+    const optimizelyDecision = await optimizelyFeatureExperimentation();
+
+    console.log('optimizelyDecision: ', optimizelyDecision);
+
     //Fetch from dummy offer orchestration service || This would be replaced by the recommendation engine
-    const orchestratedOffer = await fetchOrchestratedOffer(offerId.toLowerCase());
+    const orchestratedOffer = await fetchOrchestratedOffer(
+      offerId.toLowerCase()
+    );
 
     const flightDealsData = await fetchFlightDeals('alw', 'sea');
-    // console.log('FLIGHT DEALS: ', flightDealsData);
 
     //This function combines ochestratedOffers to the originalDynamicBLocks
     const personalizedDynamicBlocks = await personalizedBlocks(
@@ -68,6 +74,8 @@ export async function getServerSideProps(context: Context) {
       entryRes.content_blocks,
       flightDealsData
     );
+
+    // const hasOptimizelyTesting = await handleOptimizelyTesting();
 
     let finalEntryRes = entryRes;
     //Spread the original response and replace the content_blocks with the personalized content_blocks

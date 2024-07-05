@@ -20,6 +20,7 @@ const personalizedBlocks = async (orchestratedOffer, originalDynamicBlocks, flig
         }
       }
 
+
       //Check to see if price should be included in the data
       const allDirectives = originalDynamicBlocks[key]?.dynamic_block.configuration[0].directives;
       if(allDirectives.some(directive => directive.hasOwnProperty('price'))) {

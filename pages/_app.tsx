@@ -10,7 +10,6 @@ import '../styles/style.css';
 import 'react-loading-skeleton/dist/skeleton.css';
 import '@contentstack/live-preview-utils/dist/main.css';
 import { Props } from '../typescript/pages';
-import { optimizelyFeatureExperimentation } from '../util/optimizelyInitialize';
 
 Router.events.on('routeChangeStart', () => NProgress.start());
 Router.events.on('routeChangeComplete', () => NProgress.done());
@@ -28,8 +27,12 @@ function MyApp(props: Props) {
   //   variationKey,
   //   sortMethod,
   // } = optimizelyDecision;
+  // const newPageProps = {
+  //   ...pageProps,
+  //   optimizelyDecision: optimizelyDecision,
+  // };
 
-  console.log('optimizelyDecision: ', optimizelyDecision);
+  // console.log('newPageProps: ', newPageProps);
 
   const metaData = (seo: any) => {
     const metaArr = [];
@@ -89,16 +92,16 @@ MyApp.getInitialProps = async (appContext: any) => {
   const footer = await getFooterRes();
   const entries = await getAllEntries();
 
-  const optimizelyDecision = await optimizelyFeatureExperimentation();
+  // console.log('appProps: ', appProps);
 
-  console.log('appProps: ', appProps);
+  // const newAppProps = {
+  //   ...appProps,
+  //   optimizelyDecision: optimizelyDecision,
+  // };
 
-  const newAppProps = {
-    ...appProps,
-    optimizelyDecision: optimizelyDecision,
-  };
+  // console.log(newAppProps.optimizelyDecision);
 
-  return { ...newAppProps, header, footer, entries };
+  return { ...appProps, header, footer, entries };
 };
 
 export default MyApp;
